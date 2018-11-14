@@ -12,8 +12,19 @@ from PyQt5.QtWidgets import *
 
 class Ui_IHM(object):
 
+    def on_button_pressed(self, button):
+        print(button + 'pressed')
+
+
+    def on_button_released(self, button):
+        print(button + 'released')
+
 
     def setupUi(self, IHM):
+
+
+
+
         IHM.setObjectName("IHM")
         IHM.resize(779, 363)
         IHM.setMinimumSize(QSize(500, 200))
@@ -95,6 +106,25 @@ class Ui_IHM(object):
         self.statusbar = QStatusBar(IHM)
         self.statusbar.setObjectName("statusbar")
         IHM.setStatusBar(self.statusbar)
+
+
+        self.pushButton.pressed.connect(lambda: self.on_button_pressed('up'))
+        self.pushButton.released.connect(lambda: self.on_button_released('up'))
+
+        self.pushButton_2.pressed.connect(lambda: self.on_button_pressed('left'))
+        self.pushButton_2.released.connect(lambda: self.on_button_released('left'))
+
+        self.pushButton_3.pressed.connect(lambda: self.on_button_pressed('right'))
+        self.pushButton_3.released.connect(lambda: self.on_button_released('right'))
+
+        self.pushButton_4.pressed.connect(lambda: self.on_button_pressed('down'))
+        self.pushButton_4.released.connect(lambda: self.on_button_released('down'))
+
+        self.pushButton_5.pressed.connect(lambda: self.on_button_pressed('arm_up'))
+        self.pushButton_5.released.connect(lambda: self.on_button_released('arm_up'))
+
+        self.pushButton_6.pressed.connect(lambda: self.on_button_pressed('arm_down'))
+        self.pushButton_6.released.connect(lambda: self.on_button_released('arm_down'))
 
         self.retranslateUi(IHM)
         QMetaObject.connectSlotsByName(IHM)

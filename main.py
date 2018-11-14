@@ -26,11 +26,15 @@ def on_key_release(key):
     elif key == Key.right:
         commands['right']= 0
     # TODO : change arm up and arm down
-    # elif key == Key.a:
-    #     print('a ok ok ')
+    elif '{0}'.format(key) == "'z'":
+         commands['arm_up'] = 0
+    elif '{0}'.format(key) == "'q'":
+        commands['arm_down'] = 0
+
     Bluetooth_Thread.set_message(message_builder())
 
 def on_key_press(key):
+
     if key == Key.up:
         commands['up'] = 1
     elif key == Key.down:
@@ -40,22 +44,21 @@ def on_key_press(key):
     elif key == Key.right:
         commands['right']= 1
     # TODO : change arm up and arm down
+    elif '{0}'.format(key) == "'z'":
+         commands['arm_up'] = 1
+    elif '{0}'.format(key) == "'q'":
+        commands['arm_down'] = 1
+
+
     # elif key == Key.a:
     #     print('a ok ok ')
     Bluetooth_Thread.set_message(message_builder())
 
 def message_builder():
-    message_list = [commands['mode'], commands['up'], commands['down'], commands['left'], commands['right'], commands['arm_up'], commands['arm_down']]
+    message_list = [commands['mode'], commands['up'], commands['down'], commands['right'], commands['left'], commands['arm_up'], commands['arm_down']]
     message_str = ''.join(str(e) for e in message_list)
     return message_str
 
 
 with Listener(on_press = on_key_press, on_release = on_key_release) as listener:
     listener.join()
-
-
-
-print ("Finished")
-client_socket.close()
-
-

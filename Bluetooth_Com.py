@@ -21,12 +21,12 @@ class bluetooth_thread(threading.Thread):
 
             try:
                 while True:
-                    time.sleep(1)
-                    self.client_socket.send(self.message)
-                    print("Send : " + self.message)
                     data = self.client_socket.recv(4)
                     if len(data) == 0: break
                     print ("received [%s]" %data)
+                    self.client_socket.send(self.message.encode('utf-8'))
+                    print("Send : " + self.message)
+
             except IOError:
                 pass
             self.client_socket.close()
