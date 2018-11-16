@@ -13,18 +13,37 @@ from PyQt5.QtWidgets import *
 class Ui_IHM(object):
 
     def on_button_pressed(self, button):
-        print(button + 'pressed')
-
+        #TODO: Update Bluetooth thread message
+        if button == 'up':
+            print('pressed')
+        elif button == 'down':
+            print('pressed')
+        elif button == 'right':
+            print('pressed')
+        elif button == 'left':
+            print('pressed')
+        elif button == 'arm_up':
+            print('pressed')
+        elif button == 'arm_down':
+            print('pressed')
 
     def on_button_released(self, button):
-        print(button + 'released')
+        # TODO: Update Bluetooth thread message
+        if button == 'up':
+            print ('release')
+        elif button == 'down':
+            print('release')
+        elif button == 'right':
+            print('release')
+        elif button == 'left':
+            print('release')
+        elif button == 'arm_up':
+            print('release')
+        elif button == 'arm_down':
+            print('release')
 
 
     def setupUi(self, IHM):
-
-
-
-
         IHM.setObjectName("IHM")
         IHM.resize(779, 363)
         IHM.setMinimumSize(QSize(500, 200))
