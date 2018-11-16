@@ -27,6 +27,7 @@ class Ui_IHM(object):
         elif button == 'arm_down':
             print('pressed')
 
+
     def on_button_released(self, button):
         # TODO: Update Bluetooth thread message
         if button == 'up':
@@ -156,10 +157,10 @@ class Ui_IHM(object):
         self.label_2.setText(_translate("IHM", "Speed"))
         self.label_3.setText(_translate("IHM", "mm/s"))
         self.label_4.setPixmap(QPixmap("logo200.png"))
-        self.pushButton.setText(_translate("IHM", "Up"))
+        self.pushButton.setText(_translate("IHM", "Forward"))
         self.pushButton_2.setText(_translate("IHM", "Left"))
         self.pushButton_3.setText(_translate("IHM", "Right"))
-        self.pushButton_4.setText(_translate("IHM", "Down"))
+        self.pushButton_4.setText(_translate("IHM", "Backward"))
         self.radioButton.setText(_translate("IHM", "Automatic"))
         self.radioButton_2.setText(_translate("IHM", "Manual"))
         self.pushButton_5.setText(_translate("IHM", "Down"))

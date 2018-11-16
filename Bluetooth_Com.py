@@ -18,13 +18,14 @@ class bluetooth_thread(threading.Thread):
 
             try:
                 while True:
-                    data = self.client_socket.recv(4)
+                    data = self.client_socket.recv(1024)
                     if len(data) == 0: break
-                    print ("received [%s]" %data)
+                    # print ("received [%s]" %data)
                     self.client_socket.send(self.message.encode('utf-8'))
-                    print("Send : " + self.message)
-                    time.sleep(1)
+                    # print("Send : " + self.message)
+                    # time.sleep(0.01)
 
             except IOError:
                 pass
+            print ("Disconnected")
             self.client_socket.close()

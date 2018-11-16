@@ -1,7 +1,8 @@
 from builtins import str
 from pynput.keyboard import Key, Listener
-
-
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 class KeyboardListener:
 
@@ -17,50 +18,61 @@ class KeyboardListener:
         return message_str
 
     def on_key_release(self, key):
-        if key == Key.up:
+        self.graphical_thread.app.processEvents()
+        if '{0}'.format(key) == "'z'":
             self.commands['up'] = 0
-            self.graphical_thread.released('up')
-        elif key == Key.down:
+            self.graphical_thread.mIHM.pushButton.setDown(False)
+        elif '{0}'.format(key) == "'s'":
             self.commands['down']= 0
-            self.graphical_thread.released('down')
-        elif key == Key.left:
-            self.commands['left'] = 0
-            self.graphical_thread.released('left')
-        elif key == Key.right:
-            self.commands['right']= 0
-            self.graphical_thread.released('right')
-        # TODO : change arm up and arm down
-        elif '{0}'.format(key) == "'z'":
-            self.commands['arm_up'] = 0
-            self.graphical_thread.released('arm_up')
+            self.graphical_thread.mIHM.pushButton_4.setDown(False)
+            # self.graphical_thread.mIHM.pushButton_4.setStyleSheet("background-color: #f2f3f4")
         elif '{0}'.format(key) == "'q'":
+            self.commands['left'] = 0
+            self.graphical_thread.mIHM.pushButton_2.setDown(False)
+            # self.graphical_thread.mIHM.pushButton_2.setStyleSheet("background-color: #f2f3f4")
+        elif '{0}'.format(key) == "'d'":
+            self.commands['right']= 0
+            self.graphical_thread.mIHM.pushButton_3.setDown(False)
+            # self.graphical_thread.mIHM.pushButton_3.setStyleSheet("background-color: #f2f3f4")
+        # TODO : change arm up and arm down
+        elif '{0}'.format(key) == "'p'":
+            self.commands['arm_up'] = 0
+            self.graphical_thread.mIHM.pushButton_5.setDown(False)
+            # self.graphical_thread.mIHM.pushButton_5.setStyleSheet("background-color: #f2f3f4")
+        elif '{0}'.format(key) == "'m'":
             self.commands['arm_down'] = 0
-            self.graphical_thread.released('arm_down')
-
+            self.graphical_thread.mIHM.pushButton_6.setDown(False)
+            # self.graphical_thread.mIHM.pushButton_6.setStyleSheet("background-color: #f2f3f4")
+        self.graphical_thread.app.processEvents()
         self.bluetooth_thread.message = self.message_builder()
 
     def on_key_press(self, key):
-
-        if key == Key.up:
+        self.graphical_thread.app.processEvents()
+        if '{0}'.format(key) == "'z'":
             self.commands['up'] = 1
-            self.graphical_thread.pressed('up')
-        elif key == Key.down:
+            self.graphical_thread.mIHM.pushButton.setDown(True)
+        elif '{0}'.format(key) == "'s'":
             self.commands['down']= 1
-            self.graphical_thread.pressed('down')
-        elif key == Key.left:
-            self.commands['left'] = 1
-            self.graphical_thread.pressed('left')
-        elif key == Key.right:
-            self.commands['right']= 1
-            self.graphical_thread.pressed('right')
-        # TODO : change arm up and arm down
-        elif '{0}'.format(key) == "'z'":
-            self.commands['arm_up'] = 1
-            self.graphical_thread.pressed('arm_up')
+            self.graphical_thread.mIHM.pushButton_4.setDown(True)
+            # self.graphical_thread.mIHM.pushButton_4.setStyleSheet("background-color: #c3c6cc")
         elif '{0}'.format(key) == "'q'":
+            self.commands['left'] = 1
+            self.graphical_thread.mIHM.pushButton_2.setDown(True)
+            # self.graphical_thread.mIHM.pushButton_2.setStyleSheet("background-color: #c3c6cc")
+        elif '{0}'.format(key) == "'d'":
+            self.commands['right']= 1
+            self.graphical_thread.mIHM.pushButton_3.setDown(True)
+            # self.graphical_thread.mIHM.pushButton_3.setStyleSheet("background-color: #c3c6cc")
+        # TODO : change arm up and arm down
+        elif '{0}'.format(key) == "'p'":
+            self.commands['arm_up'] = 1
+            self.graphical_thread.mIHM.pushButton_5.setDown(True)
+            # self.graphical_thread.mIHM.pushButton_5.setStyleSheet("background-color: #c3c6cc")
+        elif '{0}'.format(key) == "'m'":
             self.commands['arm_down'] = 1
-            self.graphical_thread.pressed('arm_down')
-
+            self.graphical_thread.mIHM.pushButton_6.setDown(True)
+            # self.graphical_thread.mIHM.pushButton_6.setStyleSheet("background-color: #c3c6cc")
+        self.graphical_thread.app.processEvents()
         self.bluetooth_thread.message = self.message_builder()
 
 

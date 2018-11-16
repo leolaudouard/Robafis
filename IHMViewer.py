@@ -20,12 +20,14 @@ class graphical_thread(threading.Thread):
     def __init__(self, bluetooth_thread):
         threading.Thread.__init__(self)
         self.bluetooth_thread = bluetooth_thread
+        self.mIHM = ''
+        self.app = ''
 
     def run(self):
-        app = QtWidgets.QApplication(sys.argv)
-        mIHM = IHMViewer(self.bluetooth_thread)
-        mIHM.main()
-        app.exec_()
+        self.app = QtWidgets.QApplication(sys.argv)
+        self.mIHM = IHMViewer(self.bluetooth_thread)
+        self.mIHM.main()
+        self.app.exec_()
 
 
 
