@@ -9,42 +9,25 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from message_builder import message_builder
 
 class Ui_IHM(object):
 
-    def on_button_pressed(self, button):
-        #TODO: Update Bluetooth thread message
-        if button == 'up':
-            print('pressed')
-        elif button == 'down':
-            print('pressed')
-        elif button == 'right':
-            print('pressed')
-        elif button == 'left':
-            print('pressed')
-        elif button == 'arm_up':
-            print('pressed')
-        elif button == 'arm_down':
-            print('pressed')
 
+    def on_button_pressed(self, button):
+        self.commands[button] = 1
+        self.bluetooth_thread.message = message_builder(self.commands)
 
     def on_button_released(self, button):
-        # TODO: Update Bluetooth thread message
-        if button == 'up':
-            print ('release')
-        elif button == 'down':
-            print('release')
-        elif button == 'right':
-            print('release')
-        elif button == 'left':
-            print('release')
-        elif button == 'arm_up':
-            print('release')
-        elif button == 'arm_down':
-            print('release')
+        self.commands[button] = 0
+        self.bluetooth_thread.message = message_builder(self.commands)
 
+    def setBluetooth(self, bluetooth_thread):
+        self.bluetooth_thread = bluetooth_thread
 
-    def setupUi(self, IHM):
+    def setupUi(self, IHM, bluetooth_thread, commands):
+        self.bluetooth_thread = bluetooth_thread
+        self.commands = commands
         IHM.setObjectName("IHM")
         IHM.resize(779, 363)
         IHM.setMinimumSize(QSize(500, 200))
@@ -105,6 +88,7 @@ class Ui_IHM(object):
         self.radioButton_2.setGeometry(QRect(550, 60, 115, 22))
         self.radioButton_2.setMinimumSize(QSize(115, 22))
         self.radioButton_2.setObjectName("radioButton_2")
+        self.radioButton_2.setChecked(True)
 
         self.pushButton_5 = QPushButton(self.centralwidget)
         self.pushButton_5.setGeometry(QRect(110, 220, 97, 71))

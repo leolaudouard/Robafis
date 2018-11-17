@@ -14,12 +14,12 @@ commands = {'mode': 0,
 
 message = '0000000'
 Mbluetooth_thread= bluetooth_thread('00:1B:10:61:12:44', message)
-mgraphical_thread = graphical_thread(bluetooth_thread)
+mgraphical_thread = graphical_thread(Mbluetooth_thread, commands)
 
 
-
-mgraphical_thread.start()
 Mbluetooth_thread.start()
+mgraphical_thread.start()
+
 
 
 MKeyboardListener = KeyboardListener(Mbluetooth_thread, commands, mgraphical_thread)

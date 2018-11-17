@@ -10,7 +10,6 @@ class bluetooth_thread(threading.Thread):
         self.mac_adress = mac_adress
         self.message = message
 
-
     def run(self):
 
         while True:
@@ -20,10 +19,10 @@ class bluetooth_thread(threading.Thread):
                 while True:
                     data = self.client_socket.recv(1024)
                     if len(data) == 0: break
-                    # print ("received [%s]" %data)
+                    print ("received [%s]" %data)
                     self.client_socket.send(self.message.encode('utf-8'))
-                    # print("Send : " + self.message)
-                    # time.sleep(0.01)
+                    print("Send : " + self.message)
+                    # time.sleep(0.1)
 
             except IOError:
                 pass
