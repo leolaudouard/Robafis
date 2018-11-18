@@ -9,21 +9,27 @@ class bluetooth_thread(threading.Thread):
         self.client_socket = BluetoothSocket(RFCOMM)
         self.mac_adress = mac_adress
         self.message = message
+        self.speed = 0
+    def set_graph_param(self, graphical_thread):
+        self.graphical_thread = graphical_thread
 
     def run(self):
 
         while True:
-            # self.client_socket.connect((self.mac_adress, 3))
+            self.client_socket.connect((self.mac_adress, 3))
 
             try:
                 while True:
                     data = self.client_socket.recv(1024)
                     if len(data) == 0: break
                     print ("received [%s]" %data)
+                    if len(data) == 4:
+                        self.speed = int(data)/10
                     self.client_socket.send(self.message.encode('utf-8'))
                     print("Send : " + self.message)
-                    time.sleep(0.1)
-
+                    if self.graphical_thread.mIHM != '':
+                        self.graphical_thread.mIHM.progressBar.setProperty("value", self.speed)
+                    time.sleep(0.01)
             except IOError:
                 pass
             print ("Disconnected")

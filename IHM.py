@@ -17,6 +17,7 @@ class Ui_IHM(object):
     def on_button_pressed(self, button):
         if button == "automatic":
             self.commands['mode'] = 1
+            print(self.speed)
         elif button == "manual":
             self.commands['mode'] = 0
         else:
@@ -27,8 +28,7 @@ class Ui_IHM(object):
         self.commands[button] = 0
         self.bluetooth_thread.message = message_builder(self.commands)
 
-    def setBluetooth(self, bluetooth_thread):
-        self.bluetooth_thread = bluetooth_thread
+
 
     def setupUi(self, IHM, bluetooth_thread, commands):
         self.bluetooth_thread = bluetooth_thread
@@ -126,7 +126,7 @@ class Ui_IHM(object):
         self.progressBar.setFormat("%p mm/s")
         self.progressBar.setPalette(palette)
         self.progressBar.setMaximum(100)
-        self.progressBar.setProperty("value", 10)
+        self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
 
         IHM.setCentralWidget(self.centralwidget)
