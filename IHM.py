@@ -15,7 +15,12 @@ class Ui_IHM(object):
 
 
     def on_button_pressed(self, button):
-        self.commands[button] = 1
+        if button == "automatic":
+            self.commands['mode'] = 1
+        elif button == "manual":
+            self.commands['mode'] = 0
+        else:
+            self.commands[button] = 1
         self.bluetooth_thread.message = message_builder(self.commands)
 
     def on_button_released(self, button):
@@ -28,9 +33,13 @@ class Ui_IHM(object):
     def setupUi(self, IHM, bluetooth_thread, commands):
         self.bluetooth_thread = bluetooth_thread
         self.commands = commands
+
         IHM.setObjectName("IHM")
-        IHM.resize(779, 363)
-        IHM.setMinimumSize(QSize(500, 200))
+        IHM.resize(779, 379)
+        IHM.setMinimumSize(QSize(779, 363))
+        font = QFont()
+        font.setBold(True)
+        font.setWeight(75)
 
         self.setAutoFillBackground(True)
         p = self.palette()
@@ -41,64 +50,84 @@ class Ui_IHM(object):
         self.centralwidget.setObjectName("centralwidget")
 
         self.label = QLabel(self.centralwidget)
-        self.label.setGeometry(QRect(360, 50, 66, 17))
+        self.label.setGeometry(QRect(410, 30, 66, 17))
         self.label.setMinimumSize(QSize(66, 17))
         self.label.setObjectName("label")
+        self.label.setFont(font)
+
 
         self.label_2 = QLabel(self.centralwidget)
-        self.label_2.setGeometry(QRect(280, 50, 66, 17))
+        self.label_2.setGeometry(QRect(60, 30, 66, 17))
         self.label_2.setMinimumSize(QSize(66, 17))
         self.label_2.setObjectName("label_2")
+        self.label_2.setFont(font)
 
-        self.label_3 = QLabel(self.centralwidget)
-        self.label_3.setGeometry(QRect(420, 50, 66, 17))
-        self.label_3.setMinimumSize(QSize(66, 17))
-        self.label_3.setObjectName("label_3")
 
         self.label_4 = QLabel(self.centralwidget)
-        self.label_4.setGeometry(QRect(20, -60, 300, 300))
+        self.label_4.setGeometry(QRect(550, -60, 300, 300))
         self.label_4.setObjectName("label_4")
 
         self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QRect(560, 140, 97, 71))
+        self.pushButton.setGeometry(QRect(460, 150, 97, 71))
         self.pushButton.setMinimumSize(QSize(97, 71))
         self.pushButton.setObjectName("pushButton")
 
         self.pushButton_2 = QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QRect(460, 180, 97, 71))
+        self.pushButton_2.setGeometry(QRect(360, 190, 97, 71))
         self.pushButton_2.setMinimumSize(QSize(97, 71))
         self.pushButton_2.setObjectName("pushButton_2")
 
         self.pushButton_3 = QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QRect(660, 180, 97, 71))
+        self.pushButton_3.setGeometry(QRect(560, 190, 97, 71))
         self.pushButton_3.setMinimumSize(QSize(97, 71))
         self.pushButton_3.setObjectName("pushButton_3")
 
         self.pushButton_4 = QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QRect(560, 220, 97, 71))
+        self.pushButton_4.setGeometry(QRect(460, 230, 97, 71))
         self.pushButton_4.setMinimumSize(QSize(97, 71))
         self.pushButton_4.setObjectName("pushButton_4")
 
         self.radioButton = QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QRect(550, 30, 115, 22))
+        self.radioButton.setGeometry(QRect(410, 60, 115, 22))
         self.radioButton.setMinimumSize(QSize(115, 22))
         self.radioButton.setObjectName("radioButton")
 
         self.radioButton_2 = QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QRect(550, 60, 115, 22))
+        self.radioButton_2.setGeometry(QRect(410, 90, 115, 22))
         self.radioButton_2.setMinimumSize(QSize(115, 22))
-        self.radioButton_2.setObjectName("radioButton_2")
         self.radioButton_2.setChecked(True)
+        self.radioButton_2.setObjectName("radioButton_2")
 
         self.pushButton_5 = QPushButton(self.centralwidget)
-        self.pushButton_5.setGeometry(QRect(110, 220, 97, 71))
+        self.pushButton_5.setGeometry(QRect(70, 240, 97, 71))
         self.pushButton_5.setMinimumSize(QSize(97, 71))
         self.pushButton_5.setObjectName("pushButton_5")
 
         self.pushButton_6 = QPushButton(self.centralwidget)
-        self.pushButton_6.setGeometry(QRect(110, 140, 97, 71))
+        self.pushButton_6.setGeometry(QRect(70, 160, 97, 71))
         self.pushButton_6.setMinimumSize(QSize(97, 71))
         self.pushButton_6.setObjectName("pushButton_6")
+
+        self.progressBar = QProgressBar(self.centralwidget)
+        self.progressBar.setEnabled(True)
+        self.progressBar.setGeometry(QRect(60, 60, 201, 23))
+
+        palette = QPalette()
+        brush = QBrush(QColor(240, 119, 70))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Highlight, brush)
+        brush = QBrush(QColor(240, 119, 70))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.Highlight, brush)
+        brush = QBrush(QColor(240, 240, 240))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush)
+
+        self.progressBar.setFormat("%p mm/s")
+        self.progressBar.setPalette(palette)
+        self.progressBar.setMaximum(100)
+        self.progressBar.setProperty("value", 10)
+        self.progressBar.setObjectName("progressBar")
 
         IHM.setCentralWidget(self.centralwidget)
 
@@ -130,6 +159,10 @@ class Ui_IHM(object):
         self.pushButton_6.pressed.connect(lambda: self.on_button_pressed('arm_down'))
         self.pushButton_6.released.connect(lambda: self.on_button_released('arm_down'))
 
+        self.radioButton.pressed.connect(lambda: self.on_button_pressed("automatic"))
+        self.radioButton_2.pressed.connect(lambda: self.on_button_pressed("manual"))
+
+
         self.retranslateUi(IHM)
         QMetaObject.connectSlotsByName(IHM)
 
@@ -137,9 +170,8 @@ class Ui_IHM(object):
     def retranslateUi(self, IHM):
         _translate = QCoreApplication.translate
         IHM.setWindowTitle(_translate("IHM", "IHM - ROBAFIS - INSATOMIQUE"))
-        self.label.setText(_translate("IHM", "0"))
+        self.label.setText(_translate("IHM", "Mode"))
         self.label_2.setText(_translate("IHM", "Speed"))
-        self.label_3.setText(_translate("IHM", "mm/s"))
         self.label_4.setPixmap(QPixmap("logo200.png"))
         self.pushButton.setText(_translate("IHM", "Forward"))
         self.pushButton_2.setText(_translate("IHM", "Left"))

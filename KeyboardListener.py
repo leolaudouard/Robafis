@@ -1,4 +1,3 @@
-from builtins import str
 from pynput.keyboard import Key, Listener
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
