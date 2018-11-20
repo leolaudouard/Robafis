@@ -1,6 +1,7 @@
 import threading
 from bluetooth import *
 import time
+import math
 
 class bluetooth_thread(threading.Thread):
 
@@ -20,16 +21,21 @@ class bluetooth_thread(threading.Thread):
 
             try:
                 while True:
-                    data = self.client_socket.recv(1024)
+                    data = self.client_socket.recv(1)
+                    data2 = self.client_socket.recv(1)
                     if len(data) == 0: break
-                    print ("received [%s]" %data)
-                    if len(data) == 4:
-                        self.speed = int(data)/10
+                    print('test : \n')
+                    motor_1 = int(ord(data))
+                    print (motor_1)
+                    print('\n')
+                    motor_2 = int(ord(data2))
+                    print (motor_2)
+                    self.speed = motor_2
+                    # self.speed = (motor_1 + motor_2)*2*math.pi*1000/(2*60*7.26)
                     self.client_socket.send(self.message.encode('utf-8'))
                     print("Send : " + self.message)
                     if self.graphical_thread.mIHM != '':
                         self.graphical_thread.mIHM.progressBar.setProperty("value", self.speed)
-                    time.sleep(0.01)
             except IOError:
                 pass
             print ("Disconnected")

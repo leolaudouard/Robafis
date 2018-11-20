@@ -13,7 +13,7 @@ class KeyboardListener:
 
 
     def on_key_release(self, key):
-        self.graphical_thread.app.processEvents()
+        # self.graphical_thread.app.processEvents()
         if '{0}'.format(key) == "'z'":
             self.commands['up'] = 0
             self.graphical_thread.mIHM.pushButton.setDown(False)
@@ -32,7 +32,7 @@ class KeyboardListener:
         elif '{0}'.format(key) == "'m'":
             self.commands['arm_down'] = 0
             self.graphical_thread.mIHM.pushButton_5.setDown(False)
-        self.graphical_thread.app.processEvents()
+        # self.graphical_thread.app.processEvents()
         self.bluetooth_thread.message = message_builder(self.commands)
 
     def on_key_press(self, key):

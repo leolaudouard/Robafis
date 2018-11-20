@@ -17,7 +17,6 @@ class Ui_IHM(object):
     def on_button_pressed(self, button):
         if button == "automatic":
             self.commands['mode'] = 1
-            print(self.speed)
         elif button == "manual":
             self.commands['mode'] = 0
         else:
@@ -126,7 +125,7 @@ class Ui_IHM(object):
         self.progressBar.setFormat("%p mm/s")
         self.progressBar.setPalette(palette)
         self.progressBar.setMaximum(100)
-        self.progressBar.setProperty("value", 0)
+        self.progressBar.setProperty("value", 1)
         self.progressBar.setObjectName("progressBar")
 
         IHM.setCentralWidget(self.centralwidget)
@@ -172,7 +171,7 @@ class Ui_IHM(object):
         IHM.setWindowTitle(_translate("IHM", "IHM - ROBAFIS - INSATOMIQUE"))
         self.label.setText(_translate("IHM", "Mode"))
         self.label_2.setText(_translate("IHM", "Speed"))
-        self.label_4.setPixmap(QPixmap("logo200.png"))
+        self.label_4.setPixmap(QPixmap("./logo200.png"))
         self.pushButton.setText(_translate("IHM", "Forward"))
         self.pushButton_2.setText(_translate("IHM", "Left"))
         self.pushButton_3.setText(_translate("IHM", "Right"))
