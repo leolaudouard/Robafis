@@ -33,24 +33,39 @@ class Ui_IHM(object):
     def setupUi(self, IHM, bluetooth_thread, commands):
         self.bluetooth_thread = bluetooth_thread
         self.commands = commands
+
+        screen_height = 1080
+        screen_width = 1920
+
+        buttons_center = [screen_width/4, 600]
+        buttons_size = [180, 120]
+
+        font = QtGui.QFont('SansSerif', 20)
+        font.setBold(True)
+        font.setWeight(75)
+
         IHM.setObjectName("IHM")
-        IHM.resize(970, 623)
-        IHM.setMinimumSize(QtCore.QSize(779, 363))
+        IHM.resize(screen_width, screen_height)
+        IHM.setMinimumSize(QtCore.QSize(screen_width*0.5, screen_height*0.5))
+
         self.centralwidget = QtWidgets.QWidget(IHM)
         self.centralwidget.setObjectName("centralwidget")
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(5, 5, 960, 613))
+        self.tabWidget.setGeometry(QtCore.QRect(5, 5, screen_width*0.95 , screen_height*0.92))
         self.tabWidget.setObjectName("tabWidget")
+
         self.pilot_tab = QtWidgets.QWidget()
         self.pilot_tab.setObjectName("pilot_tab")
 
         self.logo = QtWidgets.QLabel(self.pilot_tab)
-        self.logo.setGeometry(QtCore.QRect(640, -50, 300, 300))
+        self.logo.setGeometry(QtCore.QRect(1170, -50, 500, 500))
         self.logo.setObjectName("logo")
 
         self.progressBar = QtWidgets.QProgressBar(self.pilot_tab)
         self.progressBar.setEnabled(True)
-        self.progressBar.setGeometry(QtCore.QRect(110, 90, 201, 23))
+        self.progressBar.setGeometry(QtCore.QRect(110, 110, 201, 23))
+
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(240, 119, 70))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -68,64 +83,51 @@ class Ui_IHM(object):
         self.progressBar.setFormat("%p mm/s")
 
         self.manual = QtWidgets.QRadioButton(self.pilot_tab)
-        self.manual.setGeometry(QtCore.QRect(460, 120, 115, 22))
+        self.manual.setGeometry(QtCore.QRect(460, 140, 115, 22))
         self.manual.setMinimumSize(QtCore.QSize(115, 22))
         self.manual.setChecked(True)
         self.manual.setObjectName("manual")
 
         self.speed = QtWidgets.QLabel(self.pilot_tab)
-        self.speed.setGeometry(QtCore.QRect(110, 60, 66, 17))
+        self.speed.setGeometry(QtCore.QRect(110, 60, 100, 40))
         self.speed.setMinimumSize(QtCore.QSize(66, 17))
-
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
         self.speed.setFont(font)
         self.speed.setObjectName("speed")
 
         self.right = QtWidgets.QPushButton(self.pilot_tab)
-        self.right.setGeometry(QtCore.QRect(300, 320, 97, 71))
+        self.right.setGeometry(QtCore.QRect(buttons_center[0] + buttons_size[0], buttons_center[1], buttons_size[0], buttons_size[1]))
         self.right.setMinimumSize(QtCore.QSize(97, 71))
         self.right.setObjectName("right")
 
         self.left = QtWidgets.QPushButton(self.pilot_tab)
-        self.left.setGeometry(QtCore.QRect(100, 320, 97, 71))
+        self.left.setGeometry(QtCore.QRect(buttons_center[0] - buttons_size[0], buttons_center[1], buttons_size[0], buttons_size[1]))
         self.left.setMinimumSize(QtCore.QSize(97, 71))
         self.left.setObjectName("left")
 
+        self.forward = QtWidgets.QPushButton(self.pilot_tab)
+        self.forward.setGeometry(QtCore.QRect(buttons_center[0], buttons_center[1] - buttons_size[1]/2, buttons_size[0], buttons_size[1]))
+        self.forward.setMinimumSize(QtCore.QSize(97, 71))
+        self.forward.setObjectName("forward")
+
         self.backward = QtWidgets.QPushButton(self.pilot_tab)
-        self.backward.setGeometry(QtCore.QRect(200, 360, 97, 71))
+        self.backward.setGeometry(QtCore.QRect(buttons_center[0], buttons_center[1] + buttons_size[1]/2, buttons_size[0], buttons_size[1]))
         self.backward.setMinimumSize(QtCore.QSize(97, 71))
         self.backward.setObjectName("backward")
 
         self.mode = QtWidgets.QLabel(self.pilot_tab)
-        self.mode.setGeometry(QtCore.QRect(460, 60, 66, 17))
+        self.mode.setGeometry(QtCore.QRect(460, 60, 100, 40))
         self.mode.setMinimumSize(QtCore.QSize(66, 17))
-
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
         self.mode.setFont(font)
         self.mode.setObjectName("mode")
 
-        self.forward = QtWidgets.QPushButton(self.pilot_tab)
-        self.forward.setGeometry(QtCore.QRect(200, 280, 97, 71))
-        self.forward.setMinimumSize(QtCore.QSize(97, 71))
-        self.forward.setObjectName("forward")
-
         self.automatic = QtWidgets.QRadioButton(self.pilot_tab)
-        self.automatic.setGeometry(QtCore.QRect(460, 90, 115, 22))
+        self.automatic.setGeometry(QtCore.QRect(460, 110, 115, 22))
         self.automatic.setMinimumSize(QtCore.QSize(115, 22))
         self.automatic.setObjectName("automatic")
 
         self.indicator = QtWidgets.QLabel(self.pilot_tab)
-        self.indicator.setGeometry(QtCore.QRect(110, 160, 111, 17))
+        self.indicator.setGeometry(QtCore.QRect(810, 60, 400, 40))
         self.indicator.setMinimumSize(QtCore.QSize(66, 17))
-
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-
         self.indicator.setFont(font)
         self.indicator.setObjectName("indicator")
 
@@ -135,17 +137,23 @@ class Ui_IHM(object):
         self.tab.setObjectName("tab")
 
         self.down = QtWidgets.QPushButton(self.tab)
-        self.down.setGeometry(QtCore.QRect(690, 360, 97, 71))
+        self.down.setGeometry(QtCore.QRect(buttons_center[0] + 750, buttons_center[1] + buttons_size[1]/2, buttons_size[0], buttons_size[1]))
         self.down.setMinimumSize(QtCore.QSize(97, 71))
         self.down.setObjectName("down")
 
+        self.up = QtWidgets.QPushButton(self.tab)
+        self.up.setGeometry(QtCore.QRect(buttons_center[0] + 750, buttons_center[1] - buttons_size[1]/2, buttons_size[0], buttons_size[1]))
+        self.up.setMinimumSize(QtCore.QSize(97, 71))
+        self.up.setObjectName("up")
+
         self.logo_2 = QtWidgets.QLabel(self.tab)
-        self.logo_2.setGeometry(QtCore.QRect(640, -50, 300, 300))
+        self.logo_2.setGeometry(QtCore.QRect(1170, -50, 500, 500))
         self.logo_2.setObjectName("logo_2")
 
         self.progressBar_2 = QtWidgets.QProgressBar(self.tab)
         self.progressBar_2.setEnabled(True)
-        self.progressBar_2.setGeometry(QtCore.QRect(110, 90, 201, 23))
+        self.progressBar_2.setGeometry(QtCore.QRect(110, 110, 201, 23))
+
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(240, 119, 70))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -156,60 +164,60 @@ class Ui_IHM(object):
         brush = QtGui.QBrush(QtGui.QColor(240, 240, 240))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
+
         self.progressBar_2.setPalette(palette)
+        self.progressBar_2.setFormat("%p mm/s")
         self.progressBar_2.setMaximum(100)
         self.progressBar_2.setProperty("value", 0)
         self.progressBar_2.setObjectName("progressBar_2")
-        self.progressBar_2.setFormat("%p mm/s")
+
+
         self.manual_2 = QtWidgets.QRadioButton(self.tab)
-        self.manual_2.setGeometry(QtCore.QRect(460, 90, 115, 22))
+        self.manual_2.setGeometry(QtCore.QRect(460, 110, 115, 22))
         self.manual_2.setMinimumSize(QtCore.QSize(115, 22))
         self.manual_2.setChecked(True)
         self.manual_2.setObjectName("manual_2")
+
         self.speed_2 = QtWidgets.QLabel(self.tab)
-        self.speed_2.setGeometry(QtCore.QRect(110, 60, 66, 17))
+        self.speed_2.setGeometry(QtCore.QRect(110, 60, 100, 40))
         self.speed_2.setMinimumSize(QtCore.QSize(66, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
         self.speed_2.setFont(font)
         self.speed_2.setObjectName("speed_2")
+
         self.right_2 = QtWidgets.QPushButton(self.tab)
-        self.right_2.setGeometry(QtCore.QRect(300, 320, 97, 71))
+        self.right_2.setGeometry(QtCore.QRect(buttons_center[0] + buttons_size[0], buttons_center[1], buttons_size[0], buttons_size[1]))
         self.right_2.setMinimumSize(QtCore.QSize(97, 71))
         self.right_2.setObjectName("right_2")
+
         self.left_2 = QtWidgets.QPushButton(self.tab)
-        self.left_2.setGeometry(QtCore.QRect(100, 320, 97, 71))
+        self.left_2.setGeometry(QtCore.QRect(buttons_center[0] - buttons_size[0], buttons_center[1], buttons_size[0], buttons_size[1]))
         self.left_2.setMinimumSize(QtCore.QSize(97, 71))
         self.left_2.setObjectName("left_2")
-        self.backward_2 = QtWidgets.QPushButton(self.tab)
-        self.backward_2.setGeometry(QtCore.QRect(200, 360, 97, 71))
-        self.backward_2.setMinimumSize(QtCore.QSize(97, 71))
-        self.backward_2.setObjectName("backward_2")
-        self.mode_2 = QtWidgets.QLabel(self.tab)
-        self.mode_2.setGeometry(QtCore.QRect(460, 60, 66, 17))
-        self.mode_2.setMinimumSize(QtCore.QSize(66, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.mode_2.setFont(font)
-        self.mode_2.setObjectName("mode_2")
+
         self.forward_2 = QtWidgets.QPushButton(self.tab)
-        self.forward_2.setGeometry(QtCore.QRect(200, 280, 97, 71))
+        self.forward_2.setGeometry(QtCore.QRect(buttons_center[0], buttons_center[1] - buttons_size[1] / 2, buttons_size[0], buttons_size[1]))
         self.forward_2.setMinimumSize(QtCore.QSize(97, 71))
         self.forward_2.setObjectName("forward_2")
-        self.up = QtWidgets.QPushButton(self.tab)
-        self.up.setGeometry(QtCore.QRect(690, 280, 97, 71))
-        self.up.setMinimumSize(QtCore.QSize(97, 71))
-        self.up.setObjectName("up")
+
+        self.backward_2 = QtWidgets.QPushButton(self.tab)
+        self.backward_2.setGeometry(QtCore.QRect(buttons_center[0], buttons_center[1] + buttons_size[1] / 2, buttons_size[0], buttons_size[1]))
+        self.backward_2.setMinimumSize(QtCore.QSize(97, 71))
+        self.backward_2.setObjectName("backward_2")
+
+        self.mode_2 = QtWidgets.QLabel(self.tab)
+        self.mode_2.setGeometry(QtCore.QRect(460, 60, 100, 40))
+        self.mode_2.setMinimumSize(QtCore.QSize(66, 17))
+        self.mode_2.setFont(font)
+        self.mode_2.setObjectName("mode_2")
+
+
+
         self.indicator_2 = QtWidgets.QLabel(self.tab)
-        self.indicator_2.setGeometry(QtCore.QRect(110, 160, 111, 17))
+        self.indicator_2.setGeometry(QtCore.QRect(810, 60, 400, 40))
         self.indicator_2.setMinimumSize(QtCore.QSize(66, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
         self.indicator_2.setFont(font)
         self.indicator_2.setObjectName("indicator_2")
+
         self.mode_2.raise_()
         self.down.raise_()
         self.logo_2.raise_()
@@ -312,8 +320,8 @@ class Ui_IHM(object):
         self.up.setText(_translate("IHM", "Up"))
         self.indicator_2.setText(_translate("IHM", "Light Indicator"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("IHM", "IHM Manu"))
-        self.logo.setPixmap(QtGui.QPixmap("./logo200.png"))
-        self.logo_2.setPixmap(QtGui.QPixmap("./logo200.png"))
+        self.logo.setPixmap(QtGui.QPixmap("./logo500.png"))
+        self.logo_2.setPixmap(QtGui.QPixmap("./logo500.png"))
 
 
 # Form implementation generated from reading ui file 'IHM.ui'
