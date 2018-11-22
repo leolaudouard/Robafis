@@ -11,11 +11,63 @@ from message_builder import message_builder
 
 class Ui_IHM(object):
 
+    def updateValue(self, value, commands):
+        self.progressBar.setValue(value)
+        self.progressBar_2.setValue(value)
+        if commands['forward']:
+            self.forward.setDown(True)
+            self.forward_2.setDown(True)
+        else:
+            self.forward.setDown(False)
+            self.forward_2.setDown(False)
+
+        if commands['backward']:
+            self.backward.setDown(True)
+            self.backward_2.setDown(True)
+        else:
+            self.backward.setDown(False)
+            self.backward_2.setDown(False)
+
+        if commands['left']:
+            self.left.setDown(True)
+            self.left_2.setDown(True)
+        else:
+            self.left.setDown(False)
+            self.left_2.setDown(False)
+
+        if commands['right']:
+            self.right.setDown(True)
+            self.right_2.setDown(True)
+        else:
+            self.right.setDown(False)
+            self.right_2.setDown(False)
+
+        if self.tabWidget.currentIndex() == 1:
+            if commands['up']:
+                self.up.setDown(True)
+            else:
+                self.up.setDown(False)
+
+            if commands['down']:
+                self.down.setDown(True)
+            else:
+                self.down.setDown(False)
+
+    def updateButton(self, button, Bool):
+        if button == 'forward':
+            self.forward.setDown(Bool)
+            self.forward_2.setDown(Bool)
+
+
     def on_button_pressed(self, button):
         if button == "automatic":
             self.commands['mode'] = 1
         elif button == "manual":
             self.commands['mode'] = 0
+        elif button == "low_speed":
+            self.commands['speedmode'] = 1
+        elif button == "high_speed":
+            self.commands['speedmode'] = 0
         else:
             self.commands[button] = 1
         self.bluetooth_thread.message = message_builder(self.commands)
@@ -30,6 +82,7 @@ class Ui_IHM(object):
             self.commands['mode'] = 0
             self.bluetooth_thread.message = message_builder(self.commands)
             self.manual.setChecked(True)
+
     def setupUi(self, IHM, bluetooth_thread, commands):
         self.bluetooth_thread = bluetooth_thread
         self.commands = commands
@@ -82,11 +135,7 @@ class Ui_IHM(object):
         self.progressBar.setObjectName("progressBar")
         self.progressBar.setFormat("%p mm/s")
 
-        self.manual = QtWidgets.QRadioButton(self.pilot_tab)
-        self.manual.setGeometry(QtCore.QRect(460, 140, 115, 22))
-        self.manual.setMinimumSize(QtCore.QSize(115, 22))
-        self.manual.setChecked(True)
-        self.manual.setObjectName("manual")
+
 
         self.speed = QtWidgets.QLabel(self.pilot_tab)
         self.speed.setGeometry(QtCore.QRect(110, 60, 100, 40))
@@ -124,6 +173,29 @@ class Ui_IHM(object):
         self.automatic.setGeometry(QtCore.QRect(460, 110, 115, 22))
         self.automatic.setMinimumSize(QtCore.QSize(115, 22))
         self.automatic.setObjectName("automatic")
+
+        self.manual = QtWidgets.QRadioButton(self.pilot_tab)
+        self.manual.setGeometry(QtCore.QRect(460, 140, 115, 22))
+        self.manual.setMinimumSize(QtCore.QSize(115, 22))
+        self.manual.setChecked(True)
+        self.manual.setObjectName("manual")
+
+
+        self.speed_mode = QtWidgets.QLabel(self.pilot_tab)
+        self.speed_mode.setGeometry(QtCore.QRect(110, 160, 200, 40))
+        self.speed_mode.setMinimumSize(QtCore.QSize(66, 17))
+        self.speed_mode.setFont(font)
+        self.speed_mode.setObjectName("speed_mode")
+
+        self.high_speed= QtWidgets.QRadioButton(self.centralwidget)
+        self.high_speed.setGeometry(QtCore.QRect(110, 230, 100, 40))
+        self.high_speed.setMinimumSize(QtCore.QSize(115, 22))
+        self.high_speed.setObjectName("automatic")
+
+        self.low_speed = QtWidgets.QRadioButton(self.centralwidget)
+        self.low_speed .setGeometry(QtCore.QRect(110, 260, 100, 40))
+        self.low_speed .setMinimumSize(QtCore.QSize(115, 22))
+        self.low_speed .setObjectName("manual")
 
         self.indicator = QtWidgets.QLabel(self.pilot_tab)
         self.indicator.setGeometry(QtCore.QRect(810, 60, 400, 40))
@@ -288,6 +360,9 @@ class Ui_IHM(object):
         self.automatic.pressed.connect(lambda: self.on_button_pressed("automatic"))
         self.manual.pressed.connect(lambda: self.on_button_pressed("manual"))
 
+        self.low_speed.pressed.connect(lambda : self.on_button_pressed("low_speed"))
+        self.high_speed.pressed.connect(lambda : self.on_button_pressed("high_speed"))
+
         self.retranslateUi(IHM)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(IHM)
@@ -303,6 +378,10 @@ class Ui_IHM(object):
         self.left.setText(_translate("IHM", "Left"))
         self.backward.setText(_translate("IHM", "Backward"))
         self.mode.setText(_translate("IHM", "Mode"))
+        self.speed_mode.setText(_translate("IHM", "Speed Mode"))
+        self.low_speed.setText(_translate("IHM", "Fast"))
+        self.high_speed.setText(_translate("IHM", "Slow"))
+
         self.forward.setText(_translate("IHM", "Forward"))
         self.automatic.setText(_translate("IHM", "Automatic"))
         self.indicator.setText(_translate("IHM", "Light Indicator"))

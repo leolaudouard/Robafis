@@ -14,14 +14,17 @@ class IHMViewer(QtWidgets.QMainWindow, IHM.Ui_IHM):
         self.show()
 
 
-class graphical_thread(threading.Thread):
+class graphical_thread():
+
+    def handleValueUpdated(self, value, commands):
+        self.mIHM.updateValue(value, commands)
+        self.app.processEvents()
 
     def __init__(self, bluetooth_thread, commands):
-        threading.Thread.__init__(self)
         self.bluetooth_thread = bluetooth_thread
         self.commands = commands
-        self.mIHM = ''
-        self.app = ''
+        self.mIHM = None
+        self.app = None
 
     def run(self):
         self.app = QtWidgets.QApplication(sys.argv)

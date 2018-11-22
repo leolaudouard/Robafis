@@ -2,6 +2,7 @@ import threading
 from bluetooth import *
 import time
 import math
+from message_builder import message_builder
 
 class bluetooth_thread(threading.Thread):
 
@@ -11,10 +12,12 @@ class bluetooth_thread(threading.Thread):
         self.mac_adress = mac_adress
         self.message = message
         self.speed = 0
-        self.data = {'motor_1': 0,
-                     'motor_2': 0}
-    def set_graph_param(self, graphical_thread):
+        self.motor_speed = 0
+
+
+    def set_params(self, graphical_thread, KeyboardListener):
         self.graphical_thread = graphical_thread
+        self.KeyboardListener = KeyboardListener
 
     def run(self):
 
@@ -23,18 +26,19 @@ class bluetooth_thread(threading.Thread):
 
             try:
                 while True:
-                    self.data['motor_1'] = int(ord(self.client_socket.recv(1)))
-                    self.data['motor_2'] = int(ord(self.client_socket.recv(1)))
-                    # if len(data) == 0: break
-                    # print (self.data['motor_1'])
-                    # print (self.data['motor_2'])
-                    self.speed = (self.data['motor_1'] + self.data['motor_2'])*2*math.pi*30/(2*60*7.26)
-                    # print (self.speed)
+
+                    self.motor_speed = self.client_socket.recv(10).decode('utf-8')
+                    speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
+
+                    self.message = message_builder(self.KeyboardListener.commands)
+
+                    if self.graphical_thread.mIHM.tabWidget.currentIndex() == 0:
+                        self.message = self.message[0:4] + '00' + self.message[7]
+
                     self.client_socket.send(self.message.encode('utf-8'))
-                    # print("Send : " + self.message)
-                    if self.graphical_thread.mIHM != '':
-                        self.graphical_thread.mIHM.progressBar.setProperty("value", self.speed)
-                        self.graphical_thread.mIHM.progressBar_2.setProperty("value", self.speed)
+                    if (self.graphical_thread.mIHM != None):
+                        self.graphical_thread.handleValueUpdated(speed, self.KeyboardListener.commands)
+                    time.sleep(0.02)
             except IOError:
                 pass
             print ("Disconnected")
