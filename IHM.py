@@ -11,9 +11,30 @@ from message_builder import message_builder
 
 class Ui_IHM(object):
 
-    def updateValue(self, value, commands):
+    def updateValue(self, value, commands, speed_limit, connection):
         self.progressBar.setValue(value)
         self.progressBar_2.setValue(value)
+        if connection:
+            if self.led_bluetooth_state != 'blue':
+                self.led_bluetooth_state = 'blue'
+                self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/blue_led.png"))
+
+        else:
+            if (self.led_bluetooth_state != 'red'):
+                self.led_bluetooth_state = 'red'
+                self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/red_led.png"))
+
+        if speed_limit:
+            if self.led_speed_state != 'red':
+                self.led_speed_state = 'red'
+                self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/red_led.png"))
+
+        else:
+            if (self.led_speed_state != 'green'):
+                self.led_speed_state = 'green'
+                self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/green_led.png"))
+
+
         if commands['forward']:
             self.forward.setDown(True)
             self.forward_2.setDown(True)
@@ -66,8 +87,10 @@ class Ui_IHM(object):
             self.commands['mode'] = 0
         elif button == "low_speed":
             self.commands['speedmode'] = 1
+            self.high_speed.setChecked(False)
         elif button == "high_speed":
             self.commands['speedmode'] = 0
+            self.low_speed.setChecked(False)
         else:
             self.commands[button] = 1
         self.bluetooth_thread.message = message_builder(self.commands)
@@ -104,6 +127,15 @@ class Ui_IHM(object):
         self.centralwidget = QtWidgets.QWidget(IHM)
         self.centralwidget.setObjectName("centralwidget")
 
+        # exec ('self._{}_{} = Led(self.centralwidget, on_color=Led.{}, shape=Led.{})'
+        #       .format('circle', 'red', 'red', 'circle'))
+        # exec ('self._{}_{}.setFocusPolicy(QtCore.Qt.NoFocus)'.format('circle', 'red'))
+        # self.led = Led(self.centralwidget, on_color='red', shape='circle')
+                            # .format('circle', 'red', 'red', 'circle'))
+        # self.led.setGeometry(QtCore.QRect(5, 5, screen_width*0.95 , screen_height*0.92))
+        # self.led.setObjectName("led")
+        # self.led.setMinimumSize(QtCore.QSize(115, 22))
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(5, 5, screen_width*0.95 , screen_height*0.92))
         self.tabWidget.setObjectName("tabWidget")
@@ -135,7 +167,25 @@ class Ui_IHM(object):
         self.progressBar.setObjectName("progressBar")
         self.progressBar.setFormat("%p mm/s")
 
+        self.led_bluetooth = QtWidgets.QLabel(self.centralwidget)
+        self.led_bluetooth.setGeometry(QtCore.QRect(810, 150, 40, 40))
+        self.led_bluetooth.setObjectName("led_bluetooth")
+        self.led_bluetooth_state = 'red'
 
+        self.led_speed = QtWidgets.QLabel(self.centralwidget)
+        self.led_speed.setGeometry(QtCore.QRect(810, 200, 40, 40))
+        self.led_speed.setObjectName("led_bluetooth")
+        self.led_speed_state = 'green'
+
+        self.bluetooth = QtWidgets.QLabel(self.centralwidget)
+        self.bluetooth.setGeometry(QtCore.QRect(860, 103, 160, 130))
+        self.bluetooth.setMinimumSize(QtCore.QSize(66, 17))
+        self.bluetooth.setObjectName("bluetooth")
+
+        self.speed_limit = QtWidgets.QLabel(self.centralwidget)
+        self.speed_limit.setGeometry(QtCore.QRect(860, 155, 130, 130))
+        self.speed_limit.setMinimumSize(QtCore.QSize(66, 17))
+        self.speed_limit.setObjectName("bluetooth")
 
         self.speed = QtWidgets.QLabel(self.pilot_tab)
         self.speed.setGeometry(QtCore.QRect(110, 60, 100, 40))
@@ -181,24 +231,25 @@ class Ui_IHM(object):
         self.manual.setObjectName("manual")
 
 
-        self.speed_mode = QtWidgets.QLabel(self.pilot_tab)
-        self.speed_mode.setGeometry(QtCore.QRect(110, 160, 200, 40))
+        self.speed_mode = QtWidgets.QLabel(self.centralwidget)
+        self.speed_mode.setGeometry(QtCore.QRect(115, 200, 200, 40))
         self.speed_mode.setMinimumSize(QtCore.QSize(66, 17))
         self.speed_mode.setFont(font)
         self.speed_mode.setObjectName("speed_mode")
 
         self.high_speed= QtWidgets.QRadioButton(self.centralwidget)
-        self.high_speed.setGeometry(QtCore.QRect(110, 230, 100, 40))
+        self.high_speed.setGeometry(QtCore.QRect(120, 240, 100, 40))
         self.high_speed.setMinimumSize(QtCore.QSize(115, 22))
         self.high_speed.setObjectName("automatic")
+        self.high_speed.setChecked(True)
 
         self.low_speed = QtWidgets.QRadioButton(self.centralwidget)
-        self.low_speed .setGeometry(QtCore.QRect(110, 260, 100, 40))
+        self.low_speed .setGeometry(QtCore.QRect(120, 270, 100, 40))
         self.low_speed .setMinimumSize(QtCore.QSize(115, 22))
         self.low_speed .setObjectName("manual")
 
-        self.indicator = QtWidgets.QLabel(self.pilot_tab)
-        self.indicator.setGeometry(QtCore.QRect(810, 60, 400, 40))
+        self.indicator = QtWidgets.QLabel(self.centralwidget)
+        self.indicator.setGeometry(QtCore.QRect(810, 90, 400, 40))
         self.indicator.setMinimumSize(QtCore.QSize(66, 17))
         self.indicator.setFont(font)
         self.indicator.setObjectName("indicator")
@@ -249,6 +300,7 @@ class Ui_IHM(object):
         self.manual_2.setMinimumSize(QtCore.QSize(115, 22))
         self.manual_2.setChecked(True)
         self.manual_2.setObjectName("manual_2")
+        self.manual_2.setEnabled(False)
 
         self.speed_2 = QtWidgets.QLabel(self.tab)
         self.speed_2.setGeometry(QtCore.QRect(110, 60, 100, 40))
@@ -283,13 +335,6 @@ class Ui_IHM(object):
         self.mode_2.setObjectName("mode_2")
 
 
-
-        self.indicator_2 = QtWidgets.QLabel(self.tab)
-        self.indicator_2.setGeometry(QtCore.QRect(810, 60, 400, 40))
-        self.indicator_2.setMinimumSize(QtCore.QSize(66, 17))
-        self.indicator_2.setFont(font)
-        self.indicator_2.setObjectName("indicator_2")
-
         self.mode_2.raise_()
         self.down.raise_()
         self.logo_2.raise_()
@@ -312,7 +357,6 @@ class Ui_IHM(object):
         self.mode_2.raise_()
         self.forward_2.raise_()
         self.up.raise_()
-        self.indicator_2.raise_()
         self.tabWidget.addTab(self.tab, "")
         IHM.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(IHM)
@@ -364,30 +408,29 @@ class Ui_IHM(object):
         self.high_speed.pressed.connect(lambda : self.on_button_pressed("high_speed"))
 
         self.retranslateUi(IHM)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(IHM)
 
     def retranslateUi(self, IHM):
         _translate = QtCore.QCoreApplication.translate
         IHM.setWindowTitle(_translate("IHM", "MainWindow"))
-        self.logo.setText(_translate("IHM", "TextLabel"))
         self.progressBar.setFormat(_translate("IHM", "%p"))
         self.manual.setText(_translate("IHM", "Manual"))
         self.speed.setText(_translate("IHM", "Speed"))
+        self.bluetooth.setText(_translate("IHM", "Bluetooth connection"))
+        self.speed_limit.setText(_translate("IHM", "Speed limit"))
         self.right.setText(_translate("IHM", "Right"))
         self.left.setText(_translate("IHM", "Left"))
         self.backward.setText(_translate("IHM", "Backward"))
         self.mode.setText(_translate("IHM", "Mode"))
         self.speed_mode.setText(_translate("IHM", "Speed Mode"))
-        self.low_speed.setText(_translate("IHM", "Fast"))
-        self.high_speed.setText(_translate("IHM", "Slow"))
-
+        self.low_speed.setText(_translate("IHM", "Slow"))
+        self.high_speed.setText(_translate("IHM", "Fast"))
         self.forward.setText(_translate("IHM", "Forward"))
         self.automatic.setText(_translate("IHM", "Automatic"))
         self.indicator.setText(_translate("IHM", "Light Indicator"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.pilot_tab), _translate("IHM", "IHM Pilot"))
         self.down.setText(_translate("IHM", "Down"))
-        self.logo_2.setText(_translate("IHM", "TextLabel"))
         self.progressBar_2.setFormat(_translate("IHM", "%p"))
         self.manual_2.setText(_translate("IHM", "Manual"))
         self.speed_2.setText(_translate("IHM", "Speed"))
@@ -397,187 +440,9 @@ class Ui_IHM(object):
         self.mode_2.setText(_translate("IHM", "Mode"))
         self.forward_2.setText(_translate("IHM", "Forward"))
         self.up.setText(_translate("IHM", "Up"))
-        self.indicator_2.setText(_translate("IHM", "Light Indicator"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("IHM", "IHM Manu"))
-        self.logo.setPixmap(QtGui.QPixmap("./logo500.png"))
-        self.logo_2.setPixmap(QtGui.QPixmap("./logo500.png"))
+        self.logo.setPixmap(QtGui.QPixmap("./images/logo500.png"))
+        self.logo_2.setPixmap(QtGui.QPixmap("./images/logo500.png"))
+        self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/blue_led.png"))
+        self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/green_led.png"))
 
-
-# Form implementation generated from reading ui file 'IHM.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
-# from PyQt5.QtCore import *
-# from PyQt5.QtGui import *
-# from PyQt5.QtWidgets import *
-# class Ui_IHM(object):
-#
-#
-#     def on_button_pressed(self, button):
-#         if button == "automatic":
-#             self.commands['mode'] = 1
-#         elif button == "manual":
-#             self.commands['mode'] = 0
-#         else:
-#             self.commands[button] = 1
-#         self.bluetooth_thread.message = message_builder(self.commands)
-#
-#     def on_button_released(self, button):
-#         self.commands[button] = 0
-#         self.bluetooth_thread.message = message_builder(self.commands)
-#
-#
-#
-#     def setupUi(self, IHM, bluetooth_thread, commands):
-#         self.bluetooth_thread = bluetooth_thread
-#         self.commands = commands
-#
-#         IHM.setObjectName("IHM")
-#         IHM.resize(1010, 683)
-#         IHM.setMinimumSize(QSize(779, 363))
-#         font = QFont()
-#         font.setBold(True)
-#         font.setWeight(75)
-#
-#         self.setAutoFillBackground(True)
-#         p = self.palette()
-#         p.setColor(self.backgroundRole(), Qt.white)
-#         self.setPalette(p)
-#
-#         self.centralwidget = QWidget(IHM)
-#         self.centralwidget.setObjectName("centralwidget")
-#
-#         self.label = QLabel(self.centralwidget)
-#         self.label.setGeometry(QRect(410, 30, 66, 17))
-#         self.label.setMinimumSize(QSize(66, 17))
-#         self.label.setObjectName("label")
-#         self.label.setFont(font)
-#
-#
-#         self.label_2 = QLabel(self.centralwidget)
-#         self.label_2.setGeometry(QRect(60, 30, 66, 17))
-#         self.label_2.setMinimumSize(QSize(66, 17))
-#         self.label_2.setObjectName("label_2")
-#         self.label_2.setFont(font)
-#
-#
-#         self.label_4 = QLabel(self.centralwidget)
-#         self.label_4.setGeometry(QRect(550, -60, 300, 300))
-#         self.label_4.setObjectName("label_4")
-#
-#         self.pushButton = QPushButton(self.centralwidget)
-#         self.pushButton.setGeometry(QRect(460, 150, 97, 71))
-#         self.pushButton.setMinimumSize(QSize(97, 71))
-#         self.pushButton.setObjectName("pushButton")
-#
-#         self.pushButton_2 = QPushButton(self.centralwidget)
-#         self.pushButton_2.setGeometry(QRect(360, 190, 97, 71))
-#         self.pushButton_2.setMinimumSize(QSize(97, 71))
-#         self.pushButton_2.setObjectName("pushButton_2")
-#
-#         self.pushButton_3 = QPushButton(self.centralwidget)
-#         self.pushButton_3.setGeometry(QRect(560, 190, 97, 71))
-#         self.pushButton_3.setMinimumSize(QSize(97, 71))
-#         self.pushButton_3.setObjectName("pushButton_3")
-#
-#         self.pushButton_4 = QPushButton(self.centralwidget)
-#         self.pushButton_4.setGeometry(QRect(460, 230, 97, 71))
-#         self.pushButton_4.setMinimumSize(QSize(97, 71))
-#         self.pushButton_4.setObjectName("pushButton_4")
-#
-#         self.radioButton = QRadioButton(self.centralwidget)
-#         self.radioButton.setGeometry(QRect(410, 60, 115, 22))
-#         self.radioButton.setMinimumSize(QSize(115, 22))
-#         self.radioButton.setObjectName("radioButton")
-#
-#         self.radioButton_2 = QRadioButton(self.centralwidget)
-#         self.radioButton_2.setGeometry(QRect(410, 90, 115, 22))
-#         self.radioButton_2.setMinimumSize(QSize(115, 22))
-#         self.radioButton_2.setChecked(True)
-#         self.radioButton_2.setObjectName("radioButton_2")
-#
-#         self.pushButton_5 = QPushButton(self.centralwidget)
-#         self.pushButton_5.setGeometry(QRect(70, 240, 97, 71))
-#         self.pushButton_5.setMinimumSize(QSize(97, 71))
-#         self.pushButton_5.setObjectName("pushButton_5")
-#
-#         self.pushButton_6 = QPushButton(self.centralwidget)
-#         self.pushButton_6.setGeometry(QRect(70, 160, 97, 71))
-#         self.pushButton_6.setMinimumSize(QSize(97, 71))
-#         self.pushButton_6.setObjectName("pushButton_6")
-#
-#         self.progressBar = QProgressBar(self.centralwidget)
-#         self.progressBar.setEnabled(True)
-#         self.progressBar.setGeometry(QRect(60, 60, 201, 23))
-#
-#         palette = QPalette()
-#         brush = QBrush(QColor(240, 119, 70))
-#         brush.setStyle(Qt.SolidPattern)
-#         palette.setBrush(QPalette.Active, QPalette.Highlight, brush)
-#         brush = QBrush(QColor(240, 119, 70))
-#         brush.setStyle(Qt.SolidPattern)
-#         palette.setBrush(QPalette.Inactive, QPalette.Highlight, brush)
-#         brush = QBrush(QColor(240, 240, 240))
-#         brush.setStyle(Qt.SolidPattern)
-#         palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush)
-#
-#         self.progressBar.setFormat("%p mm/s")
-#         self.progressBar.setPalette(palette)
-#         self.progressBar.setMaximum(100)
-#         self.progressBar.setProperty("value", 1)
-#         self.progressBar.setObjectName("progressBar")
-#
-#         IHM.setCentralWidget(self.centralwidget)
-#
-#         self.menubar = QMenuBar(IHM)
-#         self.menubar.setGeometry(QRect(0, 0, 779, 25))
-#         self.menubar.setObjectName("menubar")
-#         IHM.setMenuBar(self.menubar)
-#
-#         self.statusbar = QStatusBar(IHM)
-#         self.statusbar.setObjectName("statusbar")
-#         IHM.setStatusBar(self.statusbar)
-#
-#
-        # self.pushButton.pressed.connect(lambda: self.on_button_pressed('up'))
-        # self.pushButton.released.connect(lambda: self.on_button_released('up'))
-        #
-        # self.pushButton_2.pressed.connect(lambda: self.on_button_pressed('left'))
-        # self.pushButton_2.released.connect(lambda: self.on_button_released('left'))
-        #
-        # self.pushButton_3.pressed.connect(lambda: self.on_button_pressed('right'))
-        # self.pushButton_3.released.connect(lambda: self.on_button_released('right'))
-        #
-        # self.pushButton_4.pressed.connect(lambda: self.on_button_pressed('down'))
-        # self.pushButton_4.released.connect(lambda: self.on_button_released('down'))
-        #
-        # self.pushButton_5.pressed.connect(lambda: self.on_button_pressed('arm_up'))
-        # self.pushButton_5.released.connect(lambda: self.on_button_released('arm_up'))
-        #
-        # self.pushButton_6.pressed.connect(lambda: self.on_button_pressed('arm_down'))
-        # self.pushButton_6.released.connect(lambda: self.on_button_released('arm_down'))
-        #
-        # self.radioButton.pressed.connect(lambda: self.on_button_pressed("automatic"))
-        # self.radioButton_2.pressed.connect(lambda: self.on_button_pressed("manual"))
-#
-#
-#         self.retranslateUi(IHM)
-#         QMetaObject.connectSlotsByName(IHM)
-#
-#
-#     def retranslateUi(self, IHM):
-#         _translate = QCoreApplication.translate
-#         IHM.setWindowTitle(_translate("IHM", "IHM - ROBAFIS - INSATOMIQUE"))
-#         self.label.setText(_translate("IHM", "Mode"))
-#         self.label_2.setText(_translate("IHM", "Speed"))
-#         self.label_4.setPixmap(QPixmap("./logo200.png"))
-#         self.pushButton.setText(_translate("IHM", "Forward"))
-#         self.pushButton_2.setText(_translate("IHM", "Left"))
-#         self.pushButton_3.setText(_translate("IHM", "Right"))
-#         self.pushButton_4.setText(_translate("IHM", "Backward"))
-#         self.radioButton.setText(_translate("IHM", "Automatic"))
-#         self.radioButton_2.setText(_translate("IHM", "Manual"))
-#         self.pushButton_5.setText(_translate("IHM", "Down"))
-#         self.pushButton_6.setText(_translate("IHM", "Up"))

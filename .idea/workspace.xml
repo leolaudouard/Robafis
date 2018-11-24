@@ -6,9 +6,8 @@
       <change beforePath="$PROJECT_DIR$/Bluetooth_Com.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bluetooth_Com.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IHM.py" beforeDir="false" afterPath="$PROJECT_DIR$/IHM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IHMViewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/IHMViewer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KeyboardListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/KeyboardListener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo500.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/message_builder.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +21,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+            <state relative-caret-position="255">
+              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -34,17 +33,17 @@
       <file leaf-file-name="KeyboardListener.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KeyboardListener.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="-106">
               <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IHM.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IHM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IHM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="402" column="59" lean-forward="true" selection-start-line="402" selection-start-column="59" selection-end-line="402" selection-end-column="59" />
+            <state relative-caret-position="680">
+              <caret line="445" column="70" selection-start-line="445" selection-start-column="70" selection-end-line="445" selection-end-column="70" />
               <folding>
                 <element signature="e#192#234#0" expanded="true" />
               </folding>
@@ -55,8 +54,8 @@
       <file leaf-file-name="IHMViewer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IHMViewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+            <state relative-caret-position="425">
+              <caret line="25" column="23" lean-forward="true" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
               <folding>
                 <element signature="e#19#61#0" expanded="true" />
               </folding>
@@ -64,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bluetooth_Com.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Bluetooth_Com.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bluetooth_Com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="540">
+              <caret line="32" column="57" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="58" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -80,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/message_builder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="91" selection-start-line="2" selection-start-column="91" selection-end-line="2" selection-end-column="91" />
+              <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -98,7 +97,6 @@
     <findStrings>
       <find>client_socket</find>
       <find>self</find>
-      <find>logo</find>
       <find>indicator</find>
       <find>Mode</find>
       <find>progressB</find>
@@ -106,11 +104,20 @@
       <find>manual.</find>
       <find>mode</find>
       <find>speed</find>
-      <find>indica</find>
       <find>math</find>
       <find>ord</find>
       <find>self.manual.</find>
       <find>Speed</find>
+      <find>indica</find>
+      <find>font</find>
+      <find>automa</find>
+      <find>manual_</find>
+      <find>pixma</find>
+      <find>logo</find>
+      <find>self.blu</find>
+      <find>high</find>
+      <find>graphical_thread</find>
+      <find>self.manual_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,11 +128,12 @@
       <list>
         <option value="$PROJECT_DIR$/Command.py" />
         <option value="$PROJECT_DIR$/message_builder.py" />
+        <option value="$PROJECT_DIR$/KeyboardListener.py" />
+        <option value="$PROJECT_DIR$/ledtest.py" />
         <option value="$PROJECT_DIR$/IHMViewer.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/KeyboardListener.py" />
-        <option value="$PROJECT_DIR$/Bluetooth_Com.py" />
         <option value="$PROJECT_DIR$/IHM.py" />
+        <option value="$PROJECT_DIR$/Bluetooth_Com.py" />
       </list>
     </option>
   </component>
@@ -212,9 +220,10 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.029141933" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15542364" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32946146" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -228,7 +237,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32946146" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -245,16 +253,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Bluetooth_Com.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -572,39 +570,22 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Command.py" />
-    <entry file="file://$PROJECT_DIR$/KeyboardListener.py">
+    <entry file="file://$PROJECT_DIR$/ledtest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="578">
+          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        <state relative-caret-position="255">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IHMViewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding>
-            <element signature="e#19#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bluetooth_Com.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -612,16 +593,43 @@
     <entry file="file://$PROJECT_DIR$/message_builder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="91" selection-start-line="2" selection-start-column="91" selection-end-line="2" selection-end-column="91" />
+          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KeyboardListener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-106">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IHMViewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="23" lean-forward="true" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+          <folding>
+            <element signature="e#19#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IHM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="402" column="59" lean-forward="true" selection-start-line="402" selection-start-column="59" selection-end-line="402" selection-end-column="59" />
+        <state relative-caret-position="680">
+          <caret line="445" column="70" selection-start-line="445" selection-start-column="70" selection-end-line="445" selection-end-column="70" />
           <folding>
             <element signature="e#192#234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bluetooth_Com.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="32" column="57" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>

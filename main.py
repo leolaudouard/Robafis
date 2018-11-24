@@ -1,7 +1,6 @@
 from Bluetooth_Com import bluetooth_thread
 from KeyboardListener import KeyboardListener
 from IHMViewer import graphical_thread
-# import ipdb; ipdb.set_trace()
 
 commands = {'mode': 0,
             'forward':   0,
@@ -15,7 +14,10 @@ commands = {'mode': 0,
 
 
 message = '00000000'
-Mbluetooth_thread= bluetooth_thread('00:1B:10:61:12:44', message)
+
+# I'ROBOT MAC ADRESS
+# 00:1B:10:61:12:44
+Mbluetooth_thread= bluetooth_thread('F4:60:E2:8F:A0:E7', message)
 mgraphical_thread = graphical_thread(Mbluetooth_thread, commands)
 
 

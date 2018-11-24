@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from PyQt5 import QtGui, QtCore, QtWidgets
-import threading
 import IHM
 import sys
 
@@ -16,8 +15,8 @@ class IHMViewer(QtWidgets.QMainWindow, IHM.Ui_IHM):
 
 class graphical_thread():
 
-    def handleValueUpdated(self, value, commands):
-        self.mIHM.updateValue(value, commands)
+    def handleValueUpdated(self, value, commands, speed_limit,connection):
+        self.mIHM.updateValue(value, commands, speed_limit, connection)
         self.app.processEvents()
 
     def __init__(self, bluetooth_thread, commands):
