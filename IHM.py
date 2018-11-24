@@ -93,21 +93,18 @@ class Ui_IHM(object):
             self.low_speed.setChecked(False)
         else:
             self.commands[button] = 1
-        self.bluetooth_thread.message = message_builder(self.commands)
+
 
     def on_button_released(self, button):
         self.commands[button] = 0
-        self.bluetooth_thread.message = message_builder(self.commands)
 
 
     def onChange(self, i):  # changed!
         if (i == 1):
             self.commands['mode'] = 0
-            self.bluetooth_thread.message = message_builder(self.commands)
             self.manual.setChecked(True)
 
-    def setupUi(self, IHM, bluetooth_thread, commands):
-        self.bluetooth_thread = bluetooth_thread
+    def setupUi(self, IHM, commands):
         self.commands = commands
 
         screen_height = 1080
@@ -443,6 +440,6 @@ class Ui_IHM(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("IHM", "IHM Manu"))
         self.logo.setPixmap(QtGui.QPixmap("./images/logo500.png"))
         self.logo_2.setPixmap(QtGui.QPixmap("./images/logo500.png"))
-        self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/blue_led.png"))
+        self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/red_led.png"))
         self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/green_led.png"))
 

@@ -5,9 +5,9 @@ import IHM
 import sys
 
 class IHMViewer(QtWidgets.QMainWindow, IHM.Ui_IHM):
-    def __init__(self, bluetooth_thread, commands):
+    def __init__(self, commands):
         super(IHMViewer, self).__init__(None)
-        self.setupUi(self, bluetooth_thread, commands)
+        self.setupUi(self, commands)
 
     def main(self):
         self.show()
@@ -19,14 +19,13 @@ class graphical_thread():
         self.mIHM.updateValue(value, commands, speed_limit, connection)
         self.app.processEvents()
 
-    def __init__(self, bluetooth_thread, commands):
-        self.bluetooth_thread = bluetooth_thread
+    def __init__(self, commands):
         self.commands = commands
         self.mIHM = None
         self.app = None
 
     def run(self):
         self.app = QtWidgets.QApplication(sys.argv)
-        self.mIHM = IHMViewer(self.bluetooth_thread, self.commands)
+        self.mIHM = IHMViewer(self.commands)
         self.mIHM.main()
         self.app.exec_()
