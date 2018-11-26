@@ -39,7 +39,8 @@ class bluetooth_thread(threading.Thread):
                 try:
                     while True:
                         self.motor_speed = self.client_socket.recv(10).decode('utf-8')
-                        self.speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
+                        print(self.motor_speed)
+                        # self.speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
                         self.message = message_builder(self.commands)
 
                         if self.graphical_thread.mIHM != None:
@@ -49,14 +50,14 @@ class bluetooth_thread(threading.Thread):
                         self.client_socket.send(self.message.encode('utf-8'))
                         print (self.message)
 
-                        if self.message[7] == 1:
+                        if self.message[7] == 0:
                             self.limit = 80
 
                         else:
                             self.limit = 15
 
-                        if (self.graphical_thread.mIHM != None):
-                            self.graphical_thread.handleValueUpdated(self.speed, self.commands, self.speed > self.limit, self.connected)
+                        # if (self.graphical_thread.mIHM != None):
+                        #     self.graphical_thread.handleValueUpdated(self.speed, self.commands, self.speed > self.limit, self.connected)
 
                         # Set thread frequency to 50 Hz
                         time.sleep(0.02)

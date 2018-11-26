@@ -415,7 +415,7 @@ class Ui_IHM(object):
         self.manual.setText(_translate("IHM", "Manual"))
         self.speed.setText(_translate("IHM", "Speed"))
         self.bluetooth.setText(_translate("IHM", "Bluetooth connection"))
-        self.speed_limit.setText(_translate("IHM", "Speed limit"))
+        self.speed_limit.setText(_translate("IHM", "Under speed limit"))
         self.right.setText(_translate("IHM", "Right"))
         self.left.setText(_translate("IHM", "Left"))
         self.backward.setText(_translate("IHM", "Backward"))
