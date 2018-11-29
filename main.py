@@ -9,7 +9,8 @@ commands = {'mode': 0,
             'left':  0,
             'up': 0,
             'down': 0,
-            'speedmode': 0
+            'speedmode': 0,
+            'stopMode': 0
             }
 
 

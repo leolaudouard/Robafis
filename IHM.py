@@ -11,9 +11,18 @@ from message_builder import message_builder
 
 class Ui_IHM(object):
 
-    def updateValue(self, value, commands, speed_limit, connection):
+    def updateValue(self, value, commands, speed_limit, connection, lineFollower):
         self.progressBar.setValue(value)
         self.progressBar_2.setValue(value)
+        if lineFollower == '3':
+            if self.led_line_state != 'white':
+                self.led_line_state = 'white'
+                self.led_line.setPixmap(QtGui.QPixmap("./images/leds/white_led.png"))
+        else:
+            if self.led_line_state != 'black':
+                self.led_line_state = 'black'
+                self.led_line.setPixmap(QtGui.QPixmap("./images/leds/black_led.png"))
+
         if connection:
             if self.led_bluetooth_state != 'blue':
                 self.led_bluetooth_state = 'blue'
@@ -91,8 +100,23 @@ class Ui_IHM(object):
         elif button == "high_speed":
             self.commands['speedmode'] = 0
             self.low_speed.setChecked(False)
+        elif button == "stop":
+            if self.commands['mode'] == 1:
+                self.automatic.setChecked(False)
+                self.manual.setChecked(True)
+            for key in self.commands:
+                if key != "speedmode":
+                    self.commands[key] = 0
+
+
         else:
             self.commands[button] = 1
+
+    def on_combobox_changed(self, value):
+        if value == 'Timer':
+            self.commands['stopMode'] = 1
+        else:
+            self.commands['stopMode'] = 0
 
 
     def on_button_released(self, button):
@@ -121,24 +145,32 @@ class Ui_IHM(object):
         IHM.resize(screen_width, screen_height)
         IHM.setMinimumSize(QtCore.QSize(screen_width*0.5, screen_height*0.5))
 
+        self.setAutoFillBackground(True)
+        p = self.palette()
+        p.setColor(self.backgroundRole(), QtCore.Qt.white)
+        self.setPalette(p)
+
         self.centralwidget = QtWidgets.QWidget(IHM)
         self.centralwidget.setObjectName("centralwidget")
-
-        # exec ('self._{}_{} = Led(self.centralwidget, on_color=Led.{}, shape=Led.{})'
-        #       .format('circle', 'red', 'red', 'circle'))
-        # exec ('self._{}_{}.setFocusPolicy(QtCore.Qt.NoFocus)'.format('circle', 'red'))
-        # self.led = Led(self.centralwidget, on_color='red', shape='circle')
-                            # .format('circle', 'red', 'red', 'circle'))
-        # self.led.setGeometry(QtCore.QRect(5, 5, screen_width*0.95 , screen_height*0.92))
-        # self.led.setObjectName("led")
-        # self.led.setMinimumSize(QtCore.QSize(115, 22))
 
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(5, 5, screen_width*0.95 , screen_height*0.92))
         self.tabWidget.setObjectName("tabWidget")
 
+
+
         self.pilot_tab = QtWidgets.QWidget()
         self.pilot_tab.setObjectName("pilot_tab")
+
+        self.comboBox = QtWidgets.QComboBox(self.pilot_tab)
+        self.comboBox.setGeometry(QtCore.QRect(460, 190, 115, 22))
+        self.comboBox.setObjectName("comboBox_2")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+
+
+        p.setColor(self.pilot_tab.backgroundRole(), QtCore.Qt.white)
+        self.setPalette(p)
 
         self.logo = QtWidgets.QLabel(self.pilot_tab)
         self.logo.setGeometry(QtCore.QRect(1170, -50, 500, 500))
@@ -174,15 +206,35 @@ class Ui_IHM(object):
         self.led_speed.setObjectName("led_bluetooth")
         self.led_speed_state = 'green'
 
+        self.led_line = QtWidgets.QLabel(self.centralwidget)
+        self.led_line.setGeometry(QtCore.QRect(810, 250, 40, 40))
+        self.led_line.setObjectName("led_line")
+        self.led_line_state = 'white'
+
         self.bluetooth = QtWidgets.QLabel(self.centralwidget)
         self.bluetooth.setGeometry(QtCore.QRect(860, 103, 160, 130))
         self.bluetooth.setMinimumSize(QtCore.QSize(66, 17))
         self.bluetooth.setObjectName("bluetooth")
 
+        self.line = QtWidgets.QLabel(self.centralwidget)
+        self.line.setGeometry(QtCore.QRect(860, 205, 160, 130))
+        self.line.setMinimumSize(QtCore.QSize(66, 17))
+        self.line.setObjectName("line")
+
+        self.stop = QtWidgets.QPushButton(self.centralwidget)
+        self.stop.setGeometry(QtCore.QRect(110, 360, buttons_size[0], buttons_size[1]))
+        self.stop.setMinimumSize(QtCore.QSize(97, 71))
+        self.stop.setObjectName("stop")
+
+
+        p = self.stop.palette()
+        p.setColor(self.stop.backgroundRole(), QtCore.Qt.red)
+        self.stop.setPalette(p)
+
         self.speed_limit = QtWidgets.QLabel(self.centralwidget)
         self.speed_limit.setGeometry(QtCore.QRect(860, 155, 130, 130))
         self.speed_limit.setMinimumSize(QtCore.QSize(66, 17))
-        self.speed_limit.setObjectName("bluetooth")
+        self.speed_limit.setObjectName("speed_limit")
 
         self.speed = QtWidgets.QLabel(self.pilot_tab)
         self.speed.setGeometry(QtCore.QRect(110, 60, 100, 40))
@@ -255,6 +307,7 @@ class Ui_IHM(object):
 
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
+
 
         self.down = QtWidgets.QPushButton(self.tab)
         self.down.setGeometry(QtCore.QRect(buttons_center[0] + 750, buttons_center[1] + buttons_size[1]/2, buttons_size[0], buttons_size[1]))
@@ -391,6 +444,7 @@ class Ui_IHM(object):
         self.backward_2.released.connect(lambda: self.on_button_released('backward'))
 
         self.up.pressed.connect(lambda: self.on_button_pressed('up'))
+        self.stop.pressed.connect(lambda: self.on_button_pressed('stop'))
 
         self.up.released.connect(lambda: self.on_button_released('up'))
 
@@ -404,6 +458,8 @@ class Ui_IHM(object):
         self.low_speed.pressed.connect(lambda : self.on_button_pressed("low_speed"))
         self.high_speed.pressed.connect(lambda : self.on_button_pressed("high_speed"))
 
+        self.comboBox.currentTextChanged.connect(self.on_combobox_changed)
+
         self.retranslateUi(IHM)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(IHM)
@@ -415,8 +471,10 @@ class Ui_IHM(object):
         self.manual.setText(_translate("IHM", "Manual"))
         self.speed.setText(_translate("IHM", "Speed"))
         self.bluetooth.setText(_translate("IHM", "Bluetooth connection"))
+        self.line.setText(_translate("IHM", "Line Follower state"))
         self.speed_limit.setText(_translate("IHM", "Under speed limit"))
         self.right.setText(_translate("IHM", "Right"))
+        self.stop.setText(_translate("IHM", "Emergency Stop"))
         self.left.setText(_translate("IHM", "Left"))
         self.backward.setText(_translate("IHM", "Backward"))
         self.mode.setText(_translate("IHM", "Mode"))
@@ -441,5 +499,9 @@ class Ui_IHM(object):
         self.logo.setPixmap(QtGui.QPixmap("./images/logo500.png"))
         self.logo_2.setPixmap(QtGui.QPixmap("./images/logo500.png"))
         self.led_bluetooth.setPixmap(QtGui.QPixmap("./images/leds/red_led.png"))
+        self.led_line.setPixmap(QtGui.QPixmap("./images/leds/white_led.png"))
         self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/green_led.png"))
+        self.comboBox.setItemText(0, _translate("Dialog", "Color sensor"))
+        self.comboBox.setItemText(1, _translate("Dialog", "Timer"))
+
 

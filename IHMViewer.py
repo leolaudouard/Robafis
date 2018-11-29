@@ -15,8 +15,8 @@ class IHMViewer(QtWidgets.QMainWindow, IHM.Ui_IHM):
 
 class graphical_thread():
 
-    def handleValueUpdated(self, value, commands, speed_limit,connection):
-        self.mIHM.updateValue(value, commands, speed_limit, connection)
+    def handleValueUpdated(self, value, commands, speed_limit,connection, lineFollower):
+        self.mIHM.updateValue(value, commands, speed_limit, connection, lineFollower)
         self.app.processEvents()
 
     def __init__(self, commands):

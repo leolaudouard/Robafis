@@ -17,6 +17,7 @@ class bluetooth_thread(threading.Thread):
         self.motor_speed = 0
         self.connected = False
         self.limit = 80
+        self.lineFollower = 1;
 
 
     def run(self):
@@ -29,7 +30,7 @@ class bluetooth_thread(threading.Thread):
                 self.client_socket.connect((self.mac_adress, 3))
                 self.connected = True
                 if self.graphical_thread.mIHM != None:
-                    self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected)
+                    self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected, self.lineFollower)
             except IOError:
                 print ("Failed to connect to I'ROBOT")
                 self.connected = False
@@ -38,33 +39,35 @@ class bluetooth_thread(threading.Thread):
             if self.connected:
                 try:
                     while True:
-                        self.motor_speed = self.client_socket.recv(10).decode('utf-8')
-                        print(self.motor_speed)
-                        # self.speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
+                        self.lineFollower = (self.client_socket.recv(100).decode('utf-8'))
+                        time.sleep(0.02)
+                        self.motor_speed = self.client_socket.recv(100).decode('utf-8')
+
+                        if len(self.lineFollower) == 0:
+                            break
+                        self.speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
                         self.message = message_builder(self.commands)
 
                         if self.graphical_thread.mIHM != None:
                             if self.graphical_thread.mIHM.tabWidget.currentIndex() == 0:
-                                self.message = self.message[0:5] + '00' + self.message[7]
-
+                                self.message = self.message[0:5] + '00' + self.message[7] + self.message[8]
+                        print(self.message)
                         self.client_socket.send(self.message.encode('utf-8'))
-                        print (self.message)
-
-                        if self.message[7] == 0:
+                        if self.message[7] == '0':
                             self.limit = 80
 
                         else:
                             self.limit = 15
 
-                        # if (self.graphical_thread.mIHM != None):
-                        #     self.graphical_thread.handleValueUpdated(self.speed, self.commands, self.speed > self.limit, self.connected)
+                        if (self.graphical_thread.mIHM != None):
+                            self.graphical_thread.handleValueUpdated(self.speed, self.commands, self.speed > self.limit, self.connected, self.lineFollower)
 
                         # Set thread frequency to 50 Hz
-                        time.sleep(0.02)
+
                 except IOError:
                     pass
                 print ("Disconnected")
                 self.client_socket.close()
                 self.connected = False
-                self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected)
+                self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected, self.lineFollower)
                 time.sleep(1)
