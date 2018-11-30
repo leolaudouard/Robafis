@@ -249,7 +249,7 @@ class Ui_IHM(object):
         self.line.setObjectName("line")
 
         self.stop = QtWidgets.QPushButton(self.centralwidget)
-        self.stop.setGeometry(QtCore.QRect(1470, 400, buttons_size[0], buttons_size[1]))
+        self.stop.setGeometry(QtCore.QRect(470, 400, buttons_size[0], buttons_size[1]))
         self.stop.setMinimumSize(QtCore.QSize(97, 71))
         self.stop.setObjectName("stop")
 
@@ -289,8 +289,8 @@ class Ui_IHM(object):
         self.backward.setMinimumSize(QtCore.QSize(97, 71))
         self.backward.setObjectName("backward")
 
-        self.mode = QtWidgets.QLabel(self.pilot_tab)
-        self.mode.setGeometry(QtCore.QRect(460, 60, 100, 40))
+        self.mode = QtWidgets.QLabel(self.centralwidget)
+        self.mode.setGeometry(QtCore.QRect(460, 90, 250, 40))
         self.mode.setMinimumSize(QtCore.QSize(66, 17))
         self.mode.setFont(font)
         self.mode.setObjectName("mode")
@@ -411,14 +411,7 @@ class Ui_IHM(object):
         self.backward_2.setMinimumSize(QtCore.QSize(97, 71))
         self.backward_2.setObjectName("backward_2")
 
-        self.mode_2 = QtWidgets.QLabel(self.tab)
-        self.mode_2.setGeometry(QtCore.QRect(460, 60, 100, 40))
-        self.mode_2.setMinimumSize(QtCore.QSize(66, 17))
-        self.mode_2.setFont(font)
-        self.mode_2.setObjectName("mode_2")
 
-
-        self.mode_2.raise_()
         self.down.raise_()
         self.logo_2.raise_()
         self.progressBar_2.raise_()
@@ -438,7 +431,6 @@ class Ui_IHM(object):
         self.right_2.raise_()
         self.left_2.raise_()
         self.backward_2.raise_()
-        self.mode_2.raise_()
         self.forward_2.raise_()
         self.up.raise_()
         self.tabWidget.addTab(self.tab, "")
@@ -511,7 +503,7 @@ class Ui_IHM(object):
         self.stop.setText(_translate("IHM", "Emergency Stop"))
         self.left.setText(_translate("IHM", "Left \n \n Q"))
         self.backward.setText(_translate("IHM", "Backward \n \n S"))
-        self.mode.setText(_translate("IHM", "Mode"))
+        self.mode.setText(_translate("IHM", "Control Mode"))
         self.speed_mode.setText(_translate("IHM", "Speed Mode"))
         self.stop_mode.setText(_translate("IHM", "Stoping Mode"))
         self.low_speed.setText(_translate("IHM", "Slow"))
@@ -527,7 +519,6 @@ class Ui_IHM(object):
         self.right_2.setText(_translate("IHM", "Right \n \n D"))
         self.left_2.setText(_translate("IHM", "Left \n \n Q"))
         self.backward_2.setText(_translate("IHM", "Backward \n \n S"))
-        self.mode_2.setText(_translate("IHM", "Mode"))
         self.forward_2.setText(_translate("IHM", "Forward \n \n Z"))
         self.up.setText(_translate("IHM", "Up \n \n P"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("IHM", "IHM Manu"))

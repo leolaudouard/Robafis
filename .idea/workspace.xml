@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b00b168-51bb-4469-81ca-93d461827668" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bluetooth_Com.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bluetooth_Com.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IHM.py" beforeDir="false" afterPath="$PROJECT_DIR$/IHM.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IHM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="510" column="62" lean-forward="true" selection-start-line="510" selection-start-column="62" selection-end-line="510" selection-end-column="62" />
+            <state relative-caret-position="401">
+              <caret line="299" column="60" lean-forward="true" selection-start-line="299" selection-start-column="60" selection-end-line="299" selection-end-column="60" />
               <folding>
                 <element signature="e#192#234#0" expanded="true" />
               </folding>
@@ -62,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bluetooth_Com.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="455">
@@ -94,8 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mode</find>
-      <find>speed</find>
       <find>math</find>
       <find>ord</find>
       <find>self.manual.</find>
@@ -118,12 +114,14 @@
       <find>stop</find>
       <find>combo</find>
       <find>speed_mode</find>
-      <find>self.mode</find>
       <find>self.stop</find>
       <find>stop_m</find>
       <find>tab</find>
       <find>setPixm</find>
       <find>Color sens</find>
+      <find>emer</find>
+      <find>&quot;Mode</find>
+      <find>self.mode</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -138,8 +136,8 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/message_builder.py" />
         <option value="$PROJECT_DIR$/KeyboardListener.py" />
-        <option value="$PROJECT_DIR$/IHM.py" />
         <option value="$PROJECT_DIR$/Bluetooth_Com.py" />
+        <option value="$PROJECT_DIR$/IHM.py" />
       </list>
     </option>
   </component>
@@ -280,16 +278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IHMViewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding>
-            <element signature="e#19#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/KeyboardListener.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
@@ -307,12 +295,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IHM.py">
+    <entry file="file://$PROJECT_DIR$/IHMViewer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="510" column="62" lean-forward="true" selection-start-line="510" selection-start-column="62" selection-end-line="510" selection-end-column="62" />
+        <state relative-caret-position="270">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
           <folding>
-            <element signature="e#192#234#0" expanded="true" />
+            <element signature="e#19#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -323,6 +311,16 @@
           <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IHM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="299" column="60" lean-forward="true" selection-start-line="299" selection-start-column="60" selection-end-line="299" selection-end-column="60" />
+          <folding>
+            <element signature="e#192#234#0" expanded="true" />
           </folding>
         </state>
       </provider>
