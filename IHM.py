@@ -537,7 +537,7 @@ class Ui_IHM(object):
         self.led_line.setPixmap(QtGui.QPixmap("./images/leds/white_led.png"))
         self.speed_limit_img.setPixmap(QtGui.QPixmap("./images/zone80.png"))
         self.led_speed.setPixmap(QtGui.QPixmap("./images/leds/green_led.png"))
-        self.comboBox.setItemText(0, _translate("Dialog", "Color sensor"))
+        self.comboBox.setItemText(0, _translate("Dialog", "Light sensor"))
         self.comboBox.setItemText(1, _translate("Dialog", "Timer"))
 
 

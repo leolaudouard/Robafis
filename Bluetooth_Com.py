@@ -56,7 +56,7 @@ class bluetooth_thread(threading.Thread):
                             if self.graphical_thread.mIHM.tabWidget.currentIndex() == 0:
                                 self.message = self.message[0:5] + '00' + self.message[7] + self.message[8]
                             elif self.graphical_thread.mIHM.tabWidget.currentIndex() == 1:
-                                self.message = '0' + self.message[1:8]
+                                self.message = '0' + self.message[1:9]
 
                         print(self.message)
                         self.client_socket.send(self.message.encode('utf-8'))
