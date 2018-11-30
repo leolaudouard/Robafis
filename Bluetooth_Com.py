@@ -26,33 +26,36 @@ class bluetooth_thread(threading.Thread):
             print ("Trying to connect to I'ROBOT")
             self.client_socket = BluetoothSocket(RFCOMM)
 
-            try:
-                self.client_socket.connect((self.mac_adress, 3))
-                self.connected = True
-                if self.graphical_thread.mIHM != None:
-                    self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected, self.lineFollower)
-            except IOError:
-                print ("Failed to connect to I'ROBOT")
-                self.connected = False
-                time.sleep(1)
+            # try:
+            #     self.client_socket.connect((self.mac_adress, 3))
+            #     self.connected = True
+            #     if self.graphical_thread.mIHM != None:
+            #         self.graphical_thread.handleValueUpdated(0, self.commands, False, self.connected, self.lineFollower)
+            # except IOError:
+            #     print ("Failed to connect to I'ROBOT")
+            #     self.connected = False
+            #     time.sleep(1)
+            self.connected = True
 
             if self.connected:
                 try:
                     while True:
-                        self.lineFollower = (self.client_socket.recv(100).decode('utf-8'))
-                        time.sleep(0.02)
-                        self.motor_speed = self.client_socket.recv(100).decode('utf-8')
+                        # self.lineFollower = (self.client_socket.recv(100).decode('utf-8'))
+                        # time.sleep(0.02)
+                        # self.motor_speed = self.client_socket.recv(100).decode('utf-8')
 
-                        if len(self.lineFollower) == 0:
-                            break
+                        # if len(self.lineFollower) == 0:
+                        #     break
                         self.speed = math.fabs(int(self.motor_speed)*2*math.pi*30/(2*60*7.26))     #calculer la vitesse
                         self.message = message_builder(self.commands)
 
                         if self.graphical_thread.mIHM != None:
                             if self.graphical_thread.mIHM.tabWidget.currentIndex() == 0:
                                 self.message = self.message[0:5] + '00' + self.message[7] + self.message[8]
+                            elif self.graphical_thread.mIHM.tabWidget.currentIndex() == 1:
+                                self.message = '0' + self.message[1:8]
                         print(self.message)
-                        self.client_socket.send(self.message.encode('utf-8'))
+                        # self.client_socket.send(self.message.encode('utf-8'))
                         if self.message[7] == '0':
                             self.limit = 80
 

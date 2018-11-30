@@ -83,6 +83,27 @@ class Ui_IHM(object):
             else:
                 self.down.setDown(False)
 
+        # Update control mode only in pilot tab
+        if (self.tabWidget.currentIndex() == 0):
+            if self.commands['mode']:
+                if not(self.automatic.isChecked()):
+                    self.automatic.setChecked(True)
+            else:
+                if self.automatic.isChecked():
+                    self.manual.setChecked(True)
+
+        if self.commands['speedmode']:
+            if not(self.low_speed.isChecked()):
+                self.low_speed.setChecked(True)
+                self.high_speed.setChecked(False)
+                self.speed_limit_img.setPixmap(QtGui.QPixmap("./images/zone15.png"))
+        else:
+            if self.low_speed.isChecked():
+                self.high_speed.setChecked(True)
+                self.low_speed.setChecked(False)
+                self.speed_limit_img.setPixmap(QtGui.QPixmap("./images/zone80.png"))
+
+
     def updateButton(self, button, Bool):
         if button == 'forward':
             self.forward.setDown(Bool)
@@ -165,7 +186,7 @@ class Ui_IHM(object):
         self.pilot_tab.setObjectName("pilot_tab")
 
         self.comboBox = QtWidgets.QComboBox(self.pilot_tab)
-        self.comboBox.setGeometry(QtCore.QRect(460, 190, 115, 22))
+        self.comboBox.setGeometry(QtCore.QRect(460, 230, 115, 22))
         self.comboBox.setObjectName("comboBox_2")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
@@ -228,7 +249,7 @@ class Ui_IHM(object):
         self.line.setObjectName("line")
 
         self.stop = QtWidgets.QPushButton(self.centralwidget)
-        self.stop.setGeometry(QtCore.QRect(1235, 400, buttons_size[0], buttons_size[1]))
+        self.stop.setGeometry(QtCore.QRect(1470, 400, buttons_size[0], buttons_size[1]))
         self.stop.setMinimumSize(QtCore.QSize(97, 71))
         self.stop.setObjectName("stop")
 
@@ -291,6 +312,12 @@ class Ui_IHM(object):
         self.speed_mode.setMinimumSize(QtCore.QSize(66, 17))
         self.speed_mode.setFont(font)
         self.speed_mode.setObjectName("speed_mode")
+
+        self.stop_mode = QtWidgets.QLabel(self.pilot_tab)
+        self.stop_mode.setGeometry(QtCore.QRect(460, 170, 300, 40))
+        self.stop_mode.setMinimumSize(QtCore.QSize(66, 17))
+        self.stop_mode.setFont(font)
+        self.stop_mode.setObjectName("stop_mode")
 
         self.high_speed= QtWidgets.QRadioButton(self.centralwidget)
         self.high_speed.setGeometry(QtCore.QRect(120, 240, 100, 40))
@@ -486,6 +513,7 @@ class Ui_IHM(object):
         self.backward.setText(_translate("IHM", "Backward \n \n S"))
         self.mode.setText(_translate("IHM", "Mode"))
         self.speed_mode.setText(_translate("IHM", "Speed Mode"))
+        self.stop_mode.setText(_translate("IHM", "Stoping Mode"))
         self.low_speed.setText(_translate("IHM", "Slow"))
         self.high_speed.setText(_translate("IHM", "Fast"))
         self.forward.setText(_translate("IHM", "Forward \n \n Z"))

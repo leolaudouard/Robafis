@@ -31,6 +31,7 @@ class KeyboardListener(threading.Thread):
         elif '{0}'.format(key) == "'m'":
             self.commands['down'] = 0
 
+
     def on_key_press(self, key):
         self.updating = True
         if '{0}'.format(key) == "'z'":
@@ -49,7 +50,16 @@ class KeyboardListener(threading.Thread):
             self.commands['up'] = 1
         elif '{0}'.format(key) == "'m'":
             self.commands['down'] = 1
-
+        elif '{0}'.format(key) == "'n'":
+            if self.commands['mode'] == 1:
+                self.commands['mode'] = 0
+            else:
+                self.commands['mode'] = 1
+        elif '{0}'.format(key) == "'b'":
+            if self.commands['speedmode'] == 1:
+                self.commands['speedmode'] = 0
+            else:
+                self.commands['speedmode'] = 1
 
     def run(self):
         with Listener(on_press= self.on_key_press, on_release= self.on_key_release) as listener:
