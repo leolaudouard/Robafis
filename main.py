@@ -18,9 +18,6 @@ commands = {'mode': 0,
 # I'ROBOT MAC ADRESS
 # 00:1B:10:61:12:44
 
-# Leo phone mac adress
-# F4:60:E2:8F:A0:E7
-
 mgraphical_thread = graphical_thread(commands)
 MKeyboardListener = KeyboardListener(commands)
 Mbluetooth_thread= bluetooth_thread('00:1B:10:61:12:44', mgraphical_thread, commands)
